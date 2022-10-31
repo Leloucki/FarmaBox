@@ -30,24 +30,24 @@
                                         <p>Personalizado</p>
                                     </div>                                                    
                                     <ul class="products-cart">
-                                        @forelse ($produtosCli as $produtoCli)
+                                        @forelse ($pedidos as $pedido)
                                             <li class="pr-cart-item">
-                                                <input type="number" value="{{$produtoCli->produto->id ?? ''}}" name="produtos[{{$loop->index}}][id]" hidden>
+                                                <input type="number" value="{{$pedido->produto->id ?? ''}}" name="produtos[{{$loop->index}}][id]" hidden>
                                                 <div class="product-image">
-                                                    <figure><img src="{{asset("storage/img/produtos/".$produtoCli->produto->nomeP."") ?? ''}}" alt="{{$produtoCli->produto->nome ?? ''}}"></figure>
+                                                    <figure><img src="{{asset("storage/img/produtos/".$pedido->produto->nomeP."") ?? ''}}" alt="{{$pedido->produto->nome ?? ''}}"></figure>
                                                 </div>
                                                 <div class="product-name">
-                                                    <a class="link-to-product" href="#">{{$produtoCli->produto->nome}}</a>
+                                                    <a class="link-to-product" href="#">{{$pedido->produto->nome}}</a>
                                                 </div>
-                                                <div class="price-field product-price"><p class="price">{{'R$' . number_format($produtoCli->produto->valor, 2, ',', '.'); }}</p></div>
+                                                <div class="price-field product-price"><p class="price">{{'R$' . number_format($pedido->produto->valor, 2, ',', '.'); }}</p></div>
                                                 <div class="quantity">
                                                     <div class="quantity-input">
-                                                        <input type="text" name="produtos[{{$loop->index}}][quantidade]"  value="{{$produtoCli->quantidade ?? ''}}" id="quantidade" data-max="10" pattern="[0-9]*" >									
+                                                        <input type="text" name="produtos[{{$loop->index}}][quantidade]"  value="{{$pedido->quantidade ?? ''}}" id="quantidade" data-max="10" pattern="[0-9]*" >									
                                                         <a class="btn btn-increase" href="#"></a>
                                                         <a class="btn btn-reduce" href="#"></a>
                                                     </div>
                                                 </div>
-                                                <div class="price-field sub-total"><p class="price">{{'R$' . number_format($produtoCli->produto->valor * $produtoCli->quantidade, 2, ',', '.'); }}</p></div>
+                                                <div class="price-field sub-total"><p class="price">{{'R$' . number_format($pedido->produto->valor * $pedido->quantidade, 2, ',', '.'); }}</p></div>
                                                 <div class="delete">
                                                     <a href="#" class="btn btn-delete" title="">
                                                         <span>Delete from your cart</span>

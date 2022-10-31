@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ccard;
 use App\Models\Cliente;
 use App\Models\Endereco;
-use App\Models\ProdutosCliente;
+use App\Models\Pedido;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,10 +39,10 @@ class PerfilController extends Controller
     function produtos(Request $request){
         $cliente = Cliente::join('usuarios', 'id_usuario', 'usuarios.id')
         ->where('id_usuario', Auth::user()->id)->first();
-        $produtosCli = ProdutosCliente::where('id_cliente', $cliente->id)->get();
+        $pedidos = Pedido::where('id_cliente', $cliente->id)->get();
         return view('costumer.perfil.produtos',
         [
-        'produtosCli' => $produtosCli,
+        'pedidos' => $pedidos,
         ]
         );
     }
@@ -50,15 +50,15 @@ class PerfilController extends Controller
     function salvarProdutos(Request $request){
         $produtos = $request->input('produtos');
         $cliente = Cliente::where('id_usuario', Auth::user()->id)->first();
-        ProdutosCliente::where('id_cliente', $cliente->id)->delete();
+        Pedido::where('id_cliente', $cliente->id)->delete();
         if($produtos != null){
             foreach($produtos as $produto){
                 //dd($produto);
-                $produtosCli = new ProdutosCliente;
-                $produtosCli->quantidade = $produto['quantidade'];
-                $produtosCli->id_produto = $produto['id'];
-                $produtosCli->id_cliente = $cliente->id;
-                $produtosCli->save();
+                $pedidos = new Pedido;
+                $pedidos->quantidade = $produto['quantidade'];
+                $pedidos->id_produto = $produto['id'];
+                $pedidos->id_cliente = $cliente->id;
+                $pedidos->save();
             }
         }
 

@@ -20,7 +20,7 @@ class ProdutoController extends Controller
     public function index(Request $request){
         $produtos = $this->getProdutos($request);
 
-        return view('adminV.produtos.index', ['produtos' => $produtos->paginate(3)]);
+        return view('adminV.produtos.index', ['produtos' => $produtos->paginate(5)]);
     }
 
     public function getProdutos($request){
@@ -77,6 +77,7 @@ class ProdutoController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+            report($th);
             return back()->with([
                 'messageTitle' => 'Ops...',
                 'message' => 'Falha ao cadastrar produto',
@@ -108,16 +109,18 @@ class ProdutoController extends Controller
             $deleted = $produto->delete();            
             if(!($deleted == 1)){
                 throw new Exception('Not equal 1');                
-            }            
+            }   
+            Storage::delete('img/produtos/'.$nomeP);         
         } catch (\Throwable $th) {
             DB::rollBack();
+            report($th);
             return back()->with([
                 'messageTitle' => 'Ops...',
                 'message' => 'Falha ao excluir produto',
                 'messageIcon' => 'error'
             ]);
         }
-        Storage::delete('img/produtos/'.$nomeP);
+        
         DB::commit();
 
         return back()->with([
@@ -127,11 +130,14 @@ class ProdutoController extends Controller
         ]);
     }
 
-    public function editarView(Request $request, $id){        
+    public function editarView(Request $request){  
+        $request->validate([
+            'id' => ['required', 'numeric']
+        ]);
+        $id = $request->get('id');
         if(is_numeric($id)){
             $produto = Produto::where('id', $id)->first();  
             //dd(Storage::url($produto->nomeP));
-
             if($produto){
                 $laboratorios = Laboratorio::get();
                 $categorias = Categoria::get();
@@ -155,18 +161,66 @@ class ProdutoController extends Controller
         $valor = str_replace('.', '', $request->input('valor'));         
         $valor = str_replace(',', '.', $valor);
         $request->merge(['valor' => $valor]);
-        dd($request->all());
+        //dd($request->all());
         $request->validate([
             'nome' => ['required'],
+            'id_produto' => ['required', 'numeric'],
             'valor' => ['required', 'numeric'],
             'descricao' => ['required'],
             'imagem' => [
-                'required', 
                 'mimes:png,jpg,jpeg,webp', 
                 Rule::dimensions()->maxWidth(1000)->maxHeight(1000)->ratio(1 / 1)->minWidth(200)->minHeight(200)
             ],
         ]);
 
+        $produto = Produto::where('id', $request->input('id_produto'))->first();
+        if($produto){
+            try {
+                DB::beginTransaction();                   
 
+                if($request->has('imagem')){
+                    Storage::disk('public')->delete("img/produtos/$produto->nomeP");
+                    $produto->nomeP = $request->input('nome').'.'.$request->file('imagem')->extension();
+                    $request->file('imagem')->storeAs(
+                        'img/produtos', $produto->nomeP, 'public'
+                    );                    
+                }
+
+                if($request->has('categorias')){
+                    CategoriaProduto::where('id_produto', $produto->id)->delete();
+                    foreach($request->input('categorias') as $catID){                        
+                        $CProduto = new CategoriaProduto();
+                        $CProduto->id_produto = $produto->id;
+                        $CProduto->id_categoria = $catID;
+                        $CProduto->save();
+                    }
+                }
+
+                $produto->nome = $request->input('nome');            
+                $produto->valor = $request->input('valor');            
+                $produto->desc = $request->input('descricao');  
+                $produto->id_lab = $request->input('laboratorio');                
+                $produto->save();
+                DB::commit();
+                return back()->with([
+                    'messageTitle' => 'Sucesso',
+                    'message' => 'Produto atualizado',
+                    'messageIcon' => 'success'
+                ]);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                report($th);
+                return back()->with([
+                    'messageTitle' => 'Ops...',
+                    'message' => 'Falha ao alterar produto ',
+                    'messageIcon' => 'error'
+                ]);
+            }
+        }
+        return back()->with([
+            'messageTitle' => 'Ops...',
+            'message' => 'Produto não encontrado',
+            'messageIcon' => 'warning'
+        ]);
     }
 }

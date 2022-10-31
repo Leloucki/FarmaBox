@@ -5,9 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProdutosCliente extends Model
-{
+class Pedido extends Model
+{    
     use HasFactory;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'produtos_clientes';
 
     protected $fillable = [
         'quantidade',
@@ -16,10 +23,10 @@ class ProdutosCliente extends Model
     ];
 
     public function cliente(){
-        return $this->hasOne('App\Models\Cliente', 'id_cliente');
+        return $this->belongsTo('App\Models\Cliente', 'id_cliente');
     }
 
     public function produto(){
-        return $this->hasOne('App\Models\Produto', 'id_produto');
+        return $this->belongsTo('App\Models\Produto', 'id_produto');
     }
 }

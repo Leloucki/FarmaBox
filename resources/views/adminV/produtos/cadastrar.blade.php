@@ -21,7 +21,7 @@
 											Produto
 										</p>
 										
-										<form class="forms-sample" method="POST" action="{{url('admin/produtos/cadastrar')}}" enctype="multipart/form-data">
+										<form class="forms-sample" method="POST" action="{{url('admin/cadastrar/produtos')}}" enctype="multipart/form-data">
 											@csrf
 											<div class="form-group">
 												<label for="exampleInputName1">Nome</label>
@@ -81,7 +81,7 @@
 												<label for="descricao">Descrição</label>
 												<textarea class="form-control" id="descricao" name="descricao" rows="4"></textarea>
 											</div>
-											<button type="submit" class="btn btn-primary m-auto">Cadastrar</button>
+											<button type="submit" class="btn btn-primary m-auto d-flex justify-content-evenly">Cadastrar</button>
 											{{-- <button class="btn btn-light">Cancel</button> --}}
 										</form>
 									</div>

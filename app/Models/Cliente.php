@@ -24,4 +24,9 @@ class Cliente extends Model
         return $this->hasMany('App\Models\Endereco', 'id_cliente');
     }
 
+    public function clienteAssinatura()
+    {
+        return $this->hasOne('App\Models\Assinatura', 'id_cliente');
+    }
+
 }

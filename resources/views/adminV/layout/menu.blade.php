@@ -10,16 +10,31 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{url('admin/produtos')}}">Listar</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{url('admin/produtos/cadastrar')}}">Cadastrar</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{url('admin/cadastrar/produtos')}}">Cadastrar</a></li>
                 </ul>
             </div>
-        </li>
+        </li>        
         <li class="nav-item">
             <a class="nav-link" href="index.html">
             <i class="icon-head menu-icon"></i>
             <span class="menu-title">Usuários</span>
             </a>
-        </li>        
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#categoriaMenu" aria-expanded="false" aria-controls="ui-categoriaMenu">
+            <i class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns" viewBox="0 0 16 16">
+                <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z"/>
+              </svg></i>
+            <span class="menu-title">Categorias</span>
+            <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="categoriaMenu">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{url('admin/categorias')}}">Listar</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{url('admin/cadastrar/categorias')}}">Cadastrar</a></li>
+                </ul>
+            </div>
+        </li>      
         {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <i class="icon-layout menu-icon"></i>

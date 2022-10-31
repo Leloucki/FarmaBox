@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Models\Cliente;
 use App\Models\Produto;
-use App\Models\ProdutosCliente;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,17 +34,17 @@ class ProdutosController extends Controller
     function inserirClienteProduto(Request $request){
         $id_produto = $request->input('id_produto');
         $id_cliente = Cliente::select('id')->where('id_usuario', Auth::user()->id)->first()->id;
-        $produtoExist = ProdutosCliente::where([['id_cliente', $id_cliente], ['id_produto', $id_produto]])->first();
-        //dd($produtoExist);
-        if($produtoExist){
+        $pedidoExist = Pedido::where([['id_cliente', $id_cliente], ['id_produto', $id_produto]])->first();
+        //dd($pedidoExist);
+        if($pedidoExist){
             return  ['icon' => 'warning', 'message' => 'Produto já existente na assinatura!'];
         }
 
-        $produtoC = new ProdutosCliente;
-        $produtoC->id_produto = $id_produto;
-        $produtoC->id_cliente = $id_cliente;
-        $produtoC->quantidade = 1;
-        $produtoC->save();
+        $pedido = new Pedido;
+        $pedido->id_produto = $id_produto;
+        $pedido->id_cliente = $id_cliente;
+        $pedido->quantidade = 1;
+        $pedido->save();
 
         return ['icon' => 'success', 'message' => 'Produto inserido a assinatura!'];
     }

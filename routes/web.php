@@ -36,10 +36,19 @@ Route::namespace('App\Http\Controllers\Admin')->group(function(){
 
     Route::group(['middleware' => ['auth', 'admin']], function(){
         Route::get('admin/produtos', 'ProdutoController@index')->name('adminProdutos');
-        Route::get('admin/produtos/cadastrar', 'ProdutoController@cadastrarView');
-        Route::get('admin/produtos/editar/{id}', 'ProdutoController@editarView');
-        Route::post('admin/produtos/cadastrar', 'ProdutoController@cadastrar');
+        Route::get('admin/cadastrar/produtos', 'ProdutoController@cadastrarView');
+        Route::get('admin/produtos/editar', 'ProdutoController@editarView');
+        Route::post('admin/produtos/editar', 'ProdutoController@editar');
+        Route::post('admin/cadastrar/produtos', 'ProdutoController@cadastrar');
         Route::post('admin/produtos/deletar', 'ProdutoController@deletar');
+
+        Route::get('admin/categorias', 'CategoriaController@index');
+        Route::get('admin/cadastrar/categorias', 'CategoriaController@cadastrarView');
+        Route::post('admin/cadastrar/categorias', 'CategoriaController@cadastrar');
+        Route::post('admin/deletar/categorias', 'CategoriaController@deletar');
+        Route::get('admin/editar/categorias', 'CategoriaController@editarView');
+        Route::post('admin/editar/categorias', 'CategoriaController@editar');
+
         Route::get('admin/logout', 'HomeController@logout');
     });
 });

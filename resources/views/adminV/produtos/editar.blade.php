@@ -23,7 +23,7 @@
 										
 										<form class="forms-sample" method="POST" action="{{url('admin/produtos/editar')}}" enctype="multipart/form-data">
 											@csrf
-											<input type="text" style="display: none" value="{{$produto->id}}">
+											<input type="number" style="display: none" name="id_produto" value="{{$produto->id}}">
 											<div class="form-group">
 												<label for="exampleInputName1">Nome</label>
 												<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome do produto" value="{{$produto->nome}}" required>
@@ -97,7 +97,7 @@
 												<label for="descricao">Descrição</label>
 												<textarea class="form-control" id="descricao" name="descricao" rows="4">{{$produto->desc}}</textarea>
 											</div>
-											<button type="submit" class="btn btn-primary m-auto">Editar</button>
+											<button type="submit" class="btn btn-primary m-auto d-flex justify-content-evenly">Editar</button>
 											{{-- <button class="btn btn-light">Cancel</button> --}}
 										</form>
 									</div>

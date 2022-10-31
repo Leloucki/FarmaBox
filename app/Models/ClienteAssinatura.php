@@ -16,10 +16,10 @@ class ClienteAssinatura extends Model
     ];
 
     public function cliente(){
-        return $this->hasOne('App\Models\Cliente');
+        return $this->belongsTo('App\Models\Cliente');
     }
 
     public function assinatura(){
-        return $this->hasOne('App\Models\Assinatura');
+        return $this->belongsTo('App\Models\Assinatura');
     }
 }
