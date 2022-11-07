@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('celular');
             $table->string('cpf');
+            $table->string('dtNasc');
             $table->timestamps();
         });
 
@@ -25,12 +26,6 @@ return new class extends Migration
             ->constrained('usuarios')
             ->cascadeOnDelete()
             ->cascadeOnUpdate();
-
-            $table->foreignId('id_assin')
-            ->nullable()
-            ->constrained('assinaturas')
-            ->cascadeOnUpdate()
-            ->nullOnDelete();
         });
     }
 

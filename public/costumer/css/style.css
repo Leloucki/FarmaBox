@@ -4851,6 +4851,7 @@ table.shop_attributes tbody{
     width: -webkit-calc( 50% - 15px );
     width: -moz-calc( 50% - 15px );
     margin-bottom: 23px;
+    padding-right: 10px;
 }
 .wrap-address-billing .row-in-form.fill-wife{
     width: 100%;

@@ -11,7 +11,8 @@ class Cliente extends Model
 
     protected $fillable = [
         'celular',
-        'cpf'
+        'cpf',
+        'dtNasc'
     ];
 
     public function usuario()
@@ -21,12 +22,11 @@ class Cliente extends Model
 
     public function endereco()
     {
-        return $this->hasMany('App\Models\Endereco', 'id_cliente');
+        return $this->hasOne('App\Models\Endereco', 'id_cliente');
     }
 
     public function clienteAssinatura()
     {
-        return $this->hasOne('App\Models\Assinatura', 'id_cliente');
+        return $this->hasOne('App\Models\ClienteAssinatura', 'id_cliente');
     }
-
 }

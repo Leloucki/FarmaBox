@@ -16,18 +16,17 @@
 							<div class="col-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body p-5">
-										<h4 class="card-title text-center">Editar</h4>
+										<h4 class="card-title text-center">Cadastro</h4>
 										<p class="card-description text-center">
-											Categoria
-										</p>										
-										<form class="forms-sample" method="POST" action="{{url('admin/editar/categorias')}}">
+											Laboratorio
+										</p>								
+										<form class="forms-sample" method="POST" action="{{url('admin/cadastrar/laboratorios')}}">
 											@csrf
 											<div class="form-group">
-												<input type="number" style="display: none" name="id_categoria" value="{{$categoria->id}}">
-												<label for="nome">Nome</label>
-												<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome da categoria" value="{{$categoria->nome}}" required>
+												<label for="exampleInputName1">Nome</label>
+												<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome do laboratorio" required>
 											</div>
-											<button type="submit" class="btn btn-primary m-auto d-flex justify-content-evenly">Editar</button>
+											<button type="submit" class="btn btn-primary m-auto d-flex justify-content-evenly">Cadastrar</button>
 										</form>
 									</div>
 								</div>

@@ -22,13 +22,18 @@
                 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
 
                     <div class="row">
-                        <div class="wrap-address-billing">                     
-                            <form action="/perfil/salvarProdutos" method="POST" id="formPerfil">@csrf
+                        <div class="wrap-address-billing">                                                 
                                 <h3 class="box-title">pagamento</h3>
                                 <div class="wrap-iten-in-cart" id="meusProdutos">
                                     <div class="assinaturaPerfil">
-                                        <p>Personalizado</p>
-                                    </div>                                                    
+                                        <p>Personalizado 
+                                            <form action="{{url('/perfil/cancelar/assinatura')}}" method="post">
+                                            @csrf                                            
+                                            <button class="btn btn-sign" >Cancelar</button>
+                                            </form>
+                                        </p>                                        
+                                    </div> 
+                                    <form action="/perfil/salvarProdutos" method="POST" id="formPerfil">@csrf                                                   
                                     <ul class="products-cart">
                                         @forelse ($pedidos as $pedido)
                                             <li class="pr-cart-item">

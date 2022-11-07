@@ -238,3 +238,24 @@
         });
     </script>
 @endif
+
+@if($errors->any())
+    <style>
+        .swal2-popup{
+            min-width:25em !important;
+            min-height:25em !important;
+            font-size: 1rem !important;
+            font-family: Georgia, serif;
+        }
+    </style>
+    <script>
+        Swal.fire({
+            icon: "warning",
+            html:
+            @foreach ($errors->all() as $error)
+            "<h3>{{ $error }}</h3>" +
+            @endforeach
+            ""
+        });
+    </script>
+@endif

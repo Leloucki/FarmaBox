@@ -40,50 +40,54 @@
 									</fieldset>									
 									<fieldset class="wrap-input">
 										<label for="nome">Nome</label>
-										<input type="text" id="nome" name="nome" placeholder="Nome" required>
+										<input type="text" id="nome" name="nome" value="{{ old('nome') }}" placeholder="Nome" required>
 									</fieldset>
 									<fieldset class="wrap-input">
 										<label for="email">E-mail</label>
-										<input type="email" id="emailC" name="emailC" placeholder="exemplo@exemplo.com.br" required>
+										<input type="email" id="emailC" name="emailC" value="{{ old('emailC') }}" placeholder="exemplo@exemplo.com.br" required>
 									</fieldset>
 									<fieldset class="wrap-input">
 										<label for="celular">Celular</label>
-										<input type="text" id="celular" name="celular" placeholder="(XX) 9XXXX-XXXX" >
+										<input type="text" id="celular" name="celular" value="{{ old('celular') }}"  placeholder="(XX) 9XXXX-XXXX" >
 									</fieldset>
 									<fieldset class="wrap-input">
 										<label for="cpf">CPF</label>
-										<input type="text" id="cpf" name="cpf" placeholder="CPF" required>
+										<input type="text" id="cpf" name="cpf" value="{{ old('cpf') }}" placeholder="CPF" required>
+									</fieldset>
+									<fieldset class="wrap-input">
+										<label for="dtNasc">Data de nascimentos</label>
+										<input type="text" id="dtNasc" name="dtNasc" value="{{ old('dtNasc') }}" required>
 									</fieldset>
 									<fieldset class="wrap-title">
 										<h4 class="form-subtitle">Endereço</h4>
 									</fieldset>	
 									<fieldset class="wrap-input">
 										<label for="logradouro">Logradouro</label>
-										<input type="text" id="logradouro" name="logradouro" placeholder="Rua...">
+										<input type="text" id="logradouro" name="logradouro" value="{{ old('logradouro') }}"  placeholder="Rua...">
 									</fieldset>
 									<fieldset class="wrap-input item-width-in-half left-item ">
 										<label for="cep">CEP</label>
-										<input type="text" id="cep" name="cep" placeholder="CEP">
+										<input type="text" id="cep" name="cep" value="{{ old('cep') }}" placeholder="CEP">
 									</fieldset>
 									<fieldset class="wrap-input item-width-in-half">
 										<label for="numero">Número</label>
-										<input type="text" id="numero" name="numero" placeholder="Número">
+										<input type="text" id="numero" name="numero" value="{{ old('numero') }}" placeholder="Número">
 									</fieldset>	
 									<fieldset class="wrap-input">
 										<label for="bairro">Bairro</label>
-										<input type="text" id="bairro" name="bairro" placeholder="Bairro">
+										<input type="text" id="bairro" name="bairro" value="{{ old('bairro') }}" placeholder="Bairro">
 									</fieldset>
 									<fieldset class="wrap-input">
 										<label for="cidade">Cidade</label>
-										<input type="text" id="cidade" name="cidade" placeholder="Cidade">
+										<input type="text" id="cidade" name="cidade" value="{{ old('cidade') }}" placeholder="Cidade">
 									</fieldset>
 									<fieldset class="wrap-input">
 										<label for="estado">Estado</label>
-										<input type="text" id="estado" name="estado" placeholder="Estado">
+										<input type="text" id="estado" name="estado" value="{{ old('estado') }}"  placeholder="Estado">
 									</fieldset>
 									<fieldset class="wrap-input">
 										<label for="pais">País</label>
-										<input type="text" id="pais" name="pais" placeholder="País">
+										<input type="text" id="pais" name="pais" value="{{ old('pais') }}"  placeholder="País">
 									</fieldset>																
 									{{-- <fieldset class="wrap-functions ">
 										<label class="remember-field">

@@ -26,13 +26,13 @@
                             <form action="/perfil/salvarConta" method="POST" id="formPerfil">@csrf
                                 <h3 class="box-title">minha conta</h3>
                                 <div id="minhaConta" class="row">                                                                    
-                                    <p class="row-in-form">
+                                    <p class="row-in-form" style="width: 97%;">
                                         <label for="nomeP">Nome</label>
-                                        <input id="nomeP" type="text" name="nomeP" value="{{$cliente->nome ?? ''}}" required>
+                                        <input id="nomeP" type="text" name="nomeP" value="{{$cliente->usuario->nome}}" required>
                                     </p>
                                     <p class="row-in-form">
                                         <label for="emailP">E-mail</label>
-                                        <input id="emailP" type="email" name="emailP" value="{{$cliente->email ?? ''}}" required>
+                                        <input id="emailP" type="email" name="emailP" value="{{$cliente->usuario->email}}" required>
                                     </p>
                                     <p class="row-in-form">
                                         <label for="celularP">Celular</label>
@@ -42,7 +42,12 @@
                                         <label for="cpfP">CPF</label>
                                         <input id="cpfP" type="text" name="cpfP" value="{{$cliente->cpf ?? ''}}" required>
                                     </p>
-                                    
+                                    <p class="row-in-form">
+                                        <label for="dtNasc">Data de Nascimento</label>                                        
+                                        <input id="dtNasc" type="text" name="dtNasc" value="@if ($cliente->dtNasc != null)
+                                        {{date_format(date_create($cliente->dtNasc),"d/m/Y")}}
+                                        @endif" required>
+                                    </p>                                    
                                     <div class='col'>
                                         <p class="wrap-title">
                                             <h4 class="form-subtitle">Endereço</h4>
@@ -51,7 +56,7 @@
                                     </div>
                                     {{-- Maximiza largura input --}}
                                     <div class='col'>
-                                        <p class="row-in-form" style="width: 100%;">
+                                        <p class="row-in-form" style="width: 97%;">
                                             <label for="country">Logradouro</label>
                                             <input id="logradouro" type="text" name="lougradouro" value="{{$endereco->logradouro ?? ''}}" required>
                                         </p>

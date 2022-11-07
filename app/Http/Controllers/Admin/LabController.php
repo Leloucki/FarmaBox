@@ -3,27 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categoria;
+use App\Models\Laboratorio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CategoriaController extends Controller
+class LabController extends Controller
 {
     public function index(Request $request){
-        $categorias = $this->getCategorias($request);
-        return view('adminV.categorias.index', ['categorias' => $categorias->paginate(5)]);
+        $laboratorios = $this->getlaboratorios($request);
+        return view('adminV.laboratorio.index', ['laboratorios' => $laboratorios->paginate(5)]);
     }
 
-    public function getCategorias($request){
-        $categorias = new Categoria;
+    public function getlaboratorios($request){
+        $laboratorios = new Laboratorio;
         if($request->has('nomeSearch')){
-            $categorias = $categorias->where('nome', 'like', '%'.$request->get('nomeSearch').'%');
+            $laboratorios = $laboratorios->where('nome', 'like', '%'.$request->get('nomeSearch').'%');
         }
-        return $categorias;
+        return $laboratorios;
     }
 
     public function cadastrarView(Request $request){
-        return view('adminV.categorias.cadastrar');
+        return view('adminV.laboratorio.cadastrar');
     }
 
     public function cadastrar(Request $request){
@@ -33,21 +33,21 @@ class CategoriaController extends Controller
         //dd($request->all());
         try {
             DB::beginTransaction();
-            $isCategExist = Categoria::where('nome', $request->input('nome'))->first();
+            $isCategExist = Laboratorio::where('nome', $request->input('nome'))->first();
             if($isCategExist){
                 return back()->with([
                     'messageTitle' => 'Ops...',
-                    'message' => 'A categoria '.$request->input('nome').' já existe',
+                    'message' => 'O laboratorio '.$request->input('nome').' já existe',
                     'messageIcon' => 'warning'
                 ]);
             }
-            $categoria = new Categoria;
-            $categoria->nome = $request->input('nome');
-            $categoria->save();
+            $laboratorio = new Laboratorio;
+            $laboratorio->nome = $request->input('nome');
+            $laboratorio->save();
             DB::commit();
             return back()->with([
                 'messageTitle' => 'Sucesso',
-                'message' => 'Categoria cadastrada',
+                'message' => 'Laboratorio cadastrado',
                 'messageIcon' => 'success'
             ]);
         } catch (\Throwable $th) {
@@ -55,7 +55,7 @@ class CategoriaController extends Controller
             report($th);
             return back()->with([
                 'messageTitle' => 'Ops...',
-                'message' => 'Falha ao cadastrar categoria',
+                'message' => 'Falha ao cadastrar laboratorio',
                 'messageIcon' => 'error'
             ]);
         }        
@@ -63,24 +63,24 @@ class CategoriaController extends Controller
 
     public function deletar(Request $request){
         $request->validate([
-            'idCategoria' => ['required', 'integer']
+            'idlaboratorio' => ['required', 'integer']
         ]);
 
         try {
             DB::beginTransaction();
-            $deleted = Categoria::where('id', $request->input('idCategoria'))->delete();
+            $deleted = Laboratorio::where('id', $request->input('idlaboratorio'))->delete();
             if($deleted){
                 DB::commit();
                 return back()->with([
                     'messageTitle' => 'Sucesso',
-                    'message' => 'Categoria deletada',
+                    'message' => 'Laboratorio deletado',
                     'messageIcon' => 'success'
                 ]);
             }
             DB::rollBack();
             return back()->with([
                 'messageTitle' => 'Ops...',
-                'message' => 'Categoria não encontrada',
+                'message' => 'Laboratorio não encontrado',
                 'messageIcon' => 'warning'
             ]);
         } catch (\Throwable $th) {
@@ -88,7 +88,7 @@ class CategoriaController extends Controller
             report($th);
             back()->with([
                 'messageTitle' => 'Ops...',
-                'message' => 'Erro ao deletar categoria',
+                'message' => 'Erro ao deletar laboratorio',
                 'messageIcon' => 'error'
             ]);
         }
@@ -100,15 +100,15 @@ class CategoriaController extends Controller
         ]);
         $id = $request->get('id');
         if(is_numeric($id)){
-            $categoria = Categoria::where('id', $id)->first();  
+            $laboratorio = Laboratorio::where('id', $id)->first();  
             //dd(Storage::url($produto->nomeP));
-            if($categoria){  
-                return view('adminV.categorias.editar', ['categoria' => $categoria]);
+            if($laboratorio){  
+                return view('adminV.laboratorio.editar', ['laboratorio' => $laboratorio]);
             }
         }
         return back()->with([
             'messageTitle' => 'Ops...',
-            'message' => 'Categoria não encontrada',
+            'message' => 'Laboratorio não encontrado',
             'messageIcon' => 'warning'
         ]);
     }
@@ -116,19 +116,19 @@ class CategoriaController extends Controller
     public function editar(Request $request){
         $request->validate([
             'nome' => ['required'],
-            'id_categoria' => ['required', 'numeric']
+            'id_laboratorio' => ['required', 'numeric']
         ]);
 
-        $categoria = Categoria::where('id', $request->input('id_categoria'))->first();
-        if($categoria){
+        $laboratorio = Laboratorio::where('id', $request->input('id_laboratorio'))->first();
+        if($laboratorio){
             try {
                 DB::beginTransaction();                   
-                $categoria->nome = $request->input('nome');                         
-                $categoria->save();
+                $laboratorio->nome = $request->input('nome');                         
+                $laboratorio->save();
                 DB::commit();
                 return back()->with([
                     'messageTitle' => 'Sucesso',
-                    'message' => 'Categoria atualizada',
+                    'message' => 'Laboratorio atualizado',
                     'messageIcon' => 'success'
                 ]);
             } catch (\Throwable $th) {
@@ -136,14 +136,14 @@ class CategoriaController extends Controller
                 report($th);
                 return back()->with([
                     'messageTitle' => 'Ops...',
-                    'message' => 'Falha ao alterar categoria',
+                    'message' => 'Falha ao alterar laboratorio',
                     'messageIcon' => 'error'
                 ]);
             }
         }
         return back()->with([
             'messageTitle' => 'Ops...',
-            'message' => 'Categoria não encontrada',
+            'message' => 'Laboratorio não encontrado',
             'messageIcon' => 'warning'
         ]);
     }

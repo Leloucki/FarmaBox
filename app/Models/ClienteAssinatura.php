@@ -16,10 +16,14 @@ class ClienteAssinatura extends Model
     ];
 
     public function cliente(){
-        return $this->belongsTo('App\Models\Cliente');
+        return $this->belongsTo('App\Models\Cliente', 'id_cliente');
     }
 
     public function assinatura(){
-        return $this->belongsTo('App\Models\Assinatura');
+        return $this->belongsTo('App\Models\Assinatura', 'id_assin');
+    }
+
+    public function pedidos(){
+        return $this->hasMany('App\Models\Pedido', 'id_cliente_assinatura');
     }
 }

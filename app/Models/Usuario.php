@@ -47,4 +47,14 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     public function getAuthPassword() {
         return $this->senha;
     }
+
+    public function cliente()
+    {
+        return $this->hasOne('App\Models\Cliente', 'id_usuario');
+    }
+
+    public function admin()
+    {
+        return $this->hasOne('App\Models\Admin', 'id_usuario');
+    }
 }

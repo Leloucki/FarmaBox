@@ -33,8 +33,11 @@ class ProdutosController extends Controller
 
     function inserirClienteProduto(Request $request){
         $id_produto = $request->input('id_produto');
-        $id_cliente = Cliente::select('id')->where('id_usuario', Auth::user()->id)->first()->id;
-        $pedidoExist = Pedido::where([['id_cliente', $id_cliente], ['id_produto', $id_produto]])->first();
+        $cliente = Cliente::select('id')->where('id_usuario', Auth::user()->id)->first();
+        if($cliente->clienteAssinatura == null){
+            return  ['icon' => 'warning', 'message' => 'Assine algum de nossos planos primeiro!'];
+        }
+        $pedidoExist = Pedido::where([['id_cliente_assinatura', ], ['id_produto', $id_produto]])->first();
         //dd($pedidoExist);
         if($pedidoExist){
             return  ['icon' => 'warning', 'message' => 'Produto já existente na assinatura!'];
@@ -42,7 +45,7 @@ class ProdutosController extends Controller
 
         $pedido = new Pedido;
         $pedido->id_produto = $id_produto;
-        $pedido->id_cliente = $id_cliente;
+        $pedido->id_cliente_assinatura = $cliente->clienteAssinatura->id;
         $pedido->quantidade = 1;
         $pedido->save();
 

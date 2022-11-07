@@ -674,7 +674,7 @@ $('.addProduto').on('click', function(){
 		},
 		error: function(){
 			Toast.fire({
-				icon: 'error',
+				icon: 'warning',
 				title: 'Falha ao adicionar produto!'
 			})
 		}
@@ -717,6 +717,7 @@ function setSumario(){
 $("#celular").mask("(00) 00000-0000");
 $("#cpf").mask("000.000.000-00");
 $("#cep").mask("00000-000");
+$("#dtNasc").mask("00/00/0000");
 
 $('#categoriaSearch li').click(function(){
 	id = $(this).val();

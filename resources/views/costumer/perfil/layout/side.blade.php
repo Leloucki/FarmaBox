@@ -4,7 +4,9 @@
             <ul class="list-category">
                 <li class="category-item has-child-cate">
                     <a class="cate-link" href="{{url('/perfil')}}">Conta</a>
-                    <a class="cate-link" href="{{url('/perfil/produtos')}}">Meus Produtos</a>
+                    @if ($clienteAssin)
+                    <a class="cate-link" href="{{url('/perfil/assinatura')}}">Minha Assinatura</a>
+                    @endif                
                     <a class="cate-link" href="{{url('/perfil/pagamento')}}">Pagamento</a>
                 </li>
             </ul>

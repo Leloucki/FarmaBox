@@ -26,8 +26,8 @@ return new class extends Migration
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
             $table->foreignId('id_assin')->constrained('assinaturas')
-            ->onUpdate('no action')
-            ->onDelete('no action');
+            ->cascadeOnDelete()
+            ->cascadeOnDelete();
         });
     }
 

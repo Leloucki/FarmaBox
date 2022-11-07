@@ -10,7 +10,7 @@ return [
     'alpha_dash'           => 'O campo :attribute deve conter apenas letras, números e traços.',
     'alpha_num'            => 'O campo :attribute deve conter apenas letras e números .',
     'array'                => 'O campo :attribute deve conter um array.',
-    'before'               => 'O campo :attribute deve conter uma data anterior a :date.',
+    'before'               => 'É necessário ter mais de 18 anos.',
     'before_or_equal'      => 'O campo :attribute deve conter uma data inferior ou igual a :date.',
     'between'              => [
         'array'   => 'O campo :attribute deve conter de :min a :max itens.',
@@ -199,5 +199,7 @@ return [
         'updated_at'               => 'atualizado em',
         'username'                 => 'usuário',
         'year'                     => 'ano',
+        'dtNasc'                   => 'Data de Nascimento',
+        '-18 years'                => '18 anos',
     ],
 ];

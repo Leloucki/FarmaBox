@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('id_produto')->constrained('produtos')
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
-            $table->foreignId('id_cliente')->constrained('clientes')
+            $table->foreignId('id_cliente_assinatura')->constrained('cliente_assinaturas')
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
         });
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produtos_cliente');
+        Schema::dropIfExists('produtos_clientes');
     }
 };

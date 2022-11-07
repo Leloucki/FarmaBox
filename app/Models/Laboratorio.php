@@ -14,6 +14,6 @@ class Laboratorio extends Model
     ];
 
     public function produto(){
-        return $this->hasMany('App\Models\Produto');
+        return $this->hasMany('App\Models\Produto', 'id_lab');
     }
 }

@@ -49,6 +49,19 @@ Route::namespace('App\Http\Controllers\Admin')->group(function(){
         Route::get('admin/editar/categorias', 'CategoriaController@editarView');
         Route::post('admin/editar/categorias', 'CategoriaController@editar');
 
+        Route::get('admin/clientes', 'ClienteController@index');
+        Route::post('admin/desativar/clientes', 'ClienteController@desativar');
+        Route::post('admin/ativar/clientes', 'ClienteController@ativar');
+        Route::get('admin/editar/clientes', 'ClienteController@editarView');
+        Route::post('admin/editar/clientes', 'ClienteController@editar');
+
+        Route::get('admin/laboratorios', 'LabController@index');
+        Route::get('admin/cadastrar/laboratorios', 'LabController@cadastrarView');
+        Route::post('admin/cadastrar/laboratorios', 'LabController@cadastrar');
+        Route::post('admin/deletar/laboratorios', 'LabController@deletar');
+        Route::get('admin/editar/laboratorios', 'LabController@editarView');
+        Route::post('admin/editar/laboratorios', 'LabController@editar');
+
         Route::get('admin/logout', 'HomeController@logout');
     });
 });
@@ -75,7 +88,8 @@ Route::namespace('App\Http\Controllers\Costumer')->group(function(){
             Route::post('/perfil/salvarConta', 'PerfilController@salvarConta');
             Route::get('/perfil/pagamento', 'PerfilController@pagamento');
             Route::post('/perfil/salvarPagamento', 'PerfilController@salvarPagamento');
-            Route::get('/perfil/produtos', 'PerfilController@produtos');
+            Route::get('/perfil/assinatura', 'PerfilController@assinatura')->middleware(['clienteAssin']);
+            Route::post('/perfil/cancelar/assinatura', 'PerfilController@cencelarAssinatura')->middleware(['clienteAssin']);
             Route::post('/perfil/salvarProdutos', 'PerfilController@salvarProdutos');
             
             Route::get('/assinatura/cadastro/{assinatura}', 'AssinaturaController@cadastroView');

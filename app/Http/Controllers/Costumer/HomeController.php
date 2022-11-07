@@ -25,10 +25,21 @@ class HomeController extends Controller
 
         $remember = $request->input('remember') == '1' ? true : false;
         
-        if (Auth::attempt($credentials, $remember)){
+        if(Auth::attempt($credentials, $remember)){
             if($request->user()->hasVerifiedEmail()){
                 $request->session()->regenerate();
                 return back();
+            }
+
+            if(!(Auth::user()->ativado)){
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->with([
+                    'messageTitle' => 'Usuário desativado',
+                    'message' => 'Entre em contato com a administração para ativar',
+                    'messageIcon' => 'error'
+                ]);
             }
 
             return back()->with([

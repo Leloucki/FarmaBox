@@ -31,7 +31,7 @@ class ProdutoController extends Controller
         return $produtos;
     }
 
-    public function cadastrar(Request $request){    
+    public function cadastrar(Request $request){
         $valor = str_replace('.', '', $request->input('valor'));         
         $valor = str_replace(',', '.', $valor);
         $request->merge(['valor' => $valor]);
@@ -56,7 +56,7 @@ class ProdutoController extends Controller
 
         try {
             DB::beginTransaction();
-            $produto = new Produto();            
+            $produto = new Produto;            
             $produto->nome = $nome;
             $produto->nomeP = $nome.'.'.$imagem->extension();
             $produto->valor = $valor;
@@ -65,7 +65,7 @@ class ProdutoController extends Controller
             $produto->save();
             if($categorias != null){
                 foreach($categorias as $catID){
-                    $CProduto = new CategoriaProduto();
+                    $CProduto = new CategoriaProduto;
                     $CProduto->id_produto = $produto->id;
                     $CProduto->id_categoria = $catID;
                     $CProduto->save();
@@ -99,7 +99,7 @@ class ProdutoController extends Controller
 
     public function deletar(Request $request){
         $request->validate([
-            'idProduto' => ['required','numeric']
+            'idProduto' => ['required','integer']
         ]);
         
         try {
@@ -132,24 +132,23 @@ class ProdutoController extends Controller
 
     public function editarView(Request $request){  
         $request->validate([
-            'id' => ['required', 'numeric']
+            'id' => ['required', 'integer']
         ]);
         $id = $request->get('id');
-        if(is_numeric($id)){
-            $produto = Produto::where('id', $id)->first();  
-            //dd(Storage::url($produto->nomeP));
-            if($produto){
-                $laboratorios = Laboratorio::get();
-                $categorias = Categoria::get();
-                $categoriaProduto = CategoriaProduto::where('id_produto', $produto->id)->pluck('id_categoria')->toArray();         
-                return view('adminV.produtos.editar', [
-                    'produto' => $produto,
-                    'laboratorios' => $laboratorios,
-                    'categorias' => $categorias,
-                    'categoriaProduto' => $categoriaProduto
-                ]);
-            }
+        $produto = Produto::where('id', $id)->first();  
+        //dd(Storage::url($produto->nomeP));
+        if($produto){
+            $laboratorios = Laboratorio::get();
+            $categorias = Categoria::get();
+            $categoriaProduto = CategoriaProduto::where('id_produto', $produto->id)->pluck('id_categoria')->toArray();         
+            return view('adminV.produtos.editar', [
+                'produto' => $produto,
+                'laboratorios' => $laboratorios,
+                'categorias' => $categorias,
+                'categoriaProduto' => $categoriaProduto
+            ]);
         }
+        
         return back()->with([
             'messageTitle' => 'Ops...',
             'message' => 'Produto não encontrado',
@@ -164,7 +163,7 @@ class ProdutoController extends Controller
         //dd($request->all());
         $request->validate([
             'nome' => ['required'],
-            'id_produto' => ['required', 'numeric'],
+            'id_produto' => ['required', 'integer'],
             'valor' => ['required', 'numeric'],
             'descricao' => ['required'],
             'imagem' => [
