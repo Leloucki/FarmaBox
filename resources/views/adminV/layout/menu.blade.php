@@ -54,7 +54,13 @@
             <i class="icon-head menu-icon"></i>
             <span class="menu-title">Clientes</span>
             </a>
-        </li>     
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{url('admin/assinaturas')}}">
+            <i class="icon-head menu-icon"></i>
+            <span class="menu-title">Assinaturas</span>
+            </a>
+        </li>  
         {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <i class="icon-layout menu-icon"></i>

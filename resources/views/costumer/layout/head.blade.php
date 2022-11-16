@@ -13,7 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="{{url('costumer/css/font-awesome.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url('costumer/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url('costumer/css/owl.carousel.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url('costumer/css/flexslider.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url('costumer/css/chosen.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url('costumer/css/style.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{url('costumer/css/color-01.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url('costumer/css/color-01.css')}}">	
 </head>

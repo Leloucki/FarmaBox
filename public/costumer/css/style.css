@@ -586,7 +586,7 @@ input,textarea{
 }
 .main-info-area .right-section .wrap-icon-section{
 	display: inline-block;
-	width: 50%;
+	width: 80%;
 	float: left;
 }
 header.fill-color .right-section .wrap-icon-section .title{
@@ -4269,7 +4269,6 @@ article.single-post blockquote p:last-child::after{
 }
 .box-in-site.wrap-show-advance-info-box .wrap-products{
     border: 1px solid #e6e6e6;
-    margin-top: 10px;
     padding-top: 39px;
 }
 .box-in-site.wrap-show-advance-info-box .title-box{

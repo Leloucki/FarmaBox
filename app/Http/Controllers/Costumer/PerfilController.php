@@ -80,7 +80,7 @@ class PerfilController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             report($th);
-            return back()->with(['messageIcon' => 'error', 'messageTitle' => 'Ops...', 'message' => 'Erro ao salvar os dados!']);
+            return back()->with(['messageIcon' => 'error', 'messageTitle' => 'Ops...', 'message' => 'Erro ao salvar os dados!'.$th->getMessage()]);
         }        
     }
 
@@ -104,10 +104,10 @@ class PerfilController extends Controller
 
     function salvarConta(Request $request){
         $request->validate([
-            'nomeP' => 'required',
-            'emailP' => 'required|email',
-            'celularP' => 'required',
-            'cpfP' => 'required',
+            'nome' => 'required',
+            'email' => 'required|email',
+            'celular' => ['required', 'regex:"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$"'],
+            'cpf' => ['required', 'regex:/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/'],
             'lougradouro' => 'required',
             'cep' => 'required',
             'numero' => 'required',

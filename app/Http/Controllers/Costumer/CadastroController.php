@@ -17,10 +17,12 @@ class CadastroController extends Controller
         return view('costumer.cadastro.index');
     }
 
-    function cadastrar(Request $request){
-        if($request->isMethod('post')){
+    function cadastrar(Request $request){        
+        if($request->isMethod('post')){            
+            $request->merge(['email' => $request->input('emailC')]);
+            //dd($request->input('email'));
             $request->validate([
-                'emailC' => ['required', 'email'],
+                'email' => ['required', 'email', 'regex:/^[a-z0-9.]+@[a-z0-9]+.[a-z]+.([a-z]+)?$/i'],
             ]);
             //dd($request->all());
             $data = $request->all();
@@ -28,14 +30,15 @@ class CadastroController extends Controller
             if(is_null($result)){
                 $request->validate([
                     'passwordC' => 'required|min:3|confirmed',
-                    'nome' => 'required',
-                    'logradouro' => 'required',
-                    'numero' => 'required',
-                    'bairro' => 'required',
-                    'estado' => 'required',
-                    'pais' => 'required',
-                    'cep' => 'required',
-                    'cpf' => 'required',
+                    'nome' => ['required'],
+                    'logradouro' => ['required'],
+                    'numero' => ['required'],
+                    'celular' => ['regex:"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$"'],
+                    'bairro' => ['required'],
+                    'estado' => ['required'],
+                    'pais' => ['required'],
+                    'cep' => ['required'],
+                    'cpf' => ['required', 'regex:/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/'],
                     'dtNasc' => 'required|before:-18 years|date_format:d/m/Y'
                 ]);
                 try{

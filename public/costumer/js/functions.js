@@ -671,6 +671,10 @@ $('.addProduto').on('click', function(){
 				icon: resp.icon,
 				title: resp.message
 			});
+			console.log(resp.html);
+			if(resp.html != null){
+				$('#qtdPC').replaceWith(resp.html);
+			}
 		},
 		error: function(){
 			Toast.fire({
@@ -706,16 +710,18 @@ function setSumario(){
 	}
 	frete = getMoney($('#fretePerfil').text());
 	frete = isNaN(frete) ? 0 : frete;
-	total = frete + subTotal;
+	assinatura = getMoney($('#valorAssinaturaPerfil').text());
+	total = frete + subTotal + assinatura;
 	subTotalText = formatReal(subTotal);
 	totalText = formatReal(total);
-	console.log(frete);
 	$('#subtotalPerfil').text(subTotalText);
 	$('#totalPerfil').text(totalText);
 }
 
 $("#celular").mask("(00) 00000-0000");
+$("#celularP").mask("(00) 00000-0000");
 $("#cpf").mask("000.000.000-00");
+$("#cpfP").mask("000.000.000-00");
 $("#cep").mask("00000-000");
 $("#dtNasc").mask("00/00/0000");
 
@@ -723,4 +729,3 @@ $('#categoriaSearch li').click(function(){
 	id = $(this).val();
 	$('#categoria').val(id);
 });
-

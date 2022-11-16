@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Categoria;
+use App\Models\Pedido;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -31,6 +33,6 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
 
-        View::share('categorias', Categoria::get());
+        View::share('categorias', Categoria::get());        
     }
 }

@@ -55,6 +55,10 @@ Route::namespace('App\Http\Controllers\Admin')->group(function(){
         Route::get('admin/editar/clientes', 'ClienteController@editarView');
         Route::post('admin/editar/clientes', 'ClienteController@editar');
 
+        Route::get('admin/assinaturas', 'AssinaturaController@index');
+        Route::get('admin/editar/assinaturas', 'AssinaturaController@editarView');
+        Route::post('admin/editar/assinaturas', 'AssinaturaController@editar');
+
         Route::get('admin/laboratorios', 'LabController@index');
         Route::get('admin/cadastrar/laboratorios', 'LabController@cadastrarView');
         Route::post('admin/cadastrar/laboratorios', 'LabController@cadastrar');
@@ -66,12 +70,14 @@ Route::namespace('App\Http\Controllers\Admin')->group(function(){
     });
 });
 
-Route::namespace('App\Http\Controllers\Costumer')->group(function(){
+Route::namespace('App\Http\Controllers\Costumer')->middleware(['cliente'])->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('/assinatura', 'AssinaturaController@index');    
 
     Route::get('/produtos', 'ProdutosController@index');
+
+    Route::get('/produto/{id}', 'ProdutosController@produto');
 
     Route::get('/cadastro', 'CadastroController@index');
 
@@ -80,9 +86,10 @@ Route::namespace('App\Http\Controllers\Costumer')->group(function(){
     Route::post('/login/cliente', 'HomeController@login');
 
     
-    Route::middleware(['verified'])->group(function () {
-        Route::middleware(['auth'])->group(function () {
+    Route::middleware(['verified'])->group(function (){
+        Route::middleware(['auth'])->group(function (){
             Route::post('/produtos/inserirClienteProduto', 'ProdutosController@inserirClienteProduto');
+            Route::post('/produto/inserirClienteProduto', 'ProdutosController@inserirClienteProduto2');
             
             Route::get('/perfil', 'PerfilController@index');
             Route::post('/perfil/salvarConta', 'PerfilController@salvarConta');

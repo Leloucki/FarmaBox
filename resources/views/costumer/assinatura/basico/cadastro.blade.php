@@ -33,10 +33,10 @@
 									</div>
 									@endif
 							<div class="register-form form-item ">
-								<form class="form-stl" action="{{url("assinatura/cadastro/$id")}}" name="frm-login" method="post" >@csrf
+								<form class="form-stl" action="{{url("assinatura/cadastro/$assinatura->id")}}" name="frm-login" method="post" >@csrf
 							
                                     <fieldset class="wrap-title">
-                                        <h3 class="form-title">Assinatura Básica</h3>
+                                        <h3 class="form-title">Assinatura: {{$assinatura->nome}}</h3>
 										<h4 class="form-subtitle"></h4>
 									</fieldset>	
 									{{-- <fieldset class="wrap-title">										

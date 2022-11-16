@@ -27,20 +27,20 @@
                                 <h3 class="box-title">minha conta</h3>
                                 <div id="minhaConta" class="row">                                                                    
                                     <p class="row-in-form" style="width: 97%;">
-                                        <label for="nomeP">Nome</label>
-                                        <input id="nomeP" type="text" name="nomeP" value="{{$cliente->usuario->nome}}" required>
+                                        <label for="nome">Nome</label>
+                                        <input id="nome" type="text" name="nome" value="{{$cliente->usuario->nome}}" required>
                                     </p>
                                     <p class="row-in-form">
-                                        <label for="emailP">E-mail</label>
-                                        <input id="emailP" type="email" name="emailP" value="{{$cliente->usuario->email}}" required>
+                                        <label for="email">E-mail</label>
+                                        <input id="email" type="email" name="email" value="{{$cliente->usuario->email}}" required>
                                     </p>
                                     <p class="row-in-form">
                                         <label for="celularP">Celular</label>
-                                        <input id="celularP" type="text" name="celularP" value="{{$cliente->celular ?? ''}}" required>
+                                        <input id="celular" type="text" name="celular" value="{{$cliente->celular ?? ''}}" required>
                                     </p>
                                     <p class="row-in-form">
-                                        <label for="cpfP">CPF</label>
-                                        <input id="cpfP" type="text" name="cpfP" value="{{$cliente->cpf ?? ''}}" required>
+                                        <label for="cpf">CPF</label>
+                                        <input id="cpf" type="text" name="cpf" value="{{$cliente->cpf ?? ''}}" required>
                                     </p>
                                     <p class="row-in-form">
                                         <label for="dtNasc">Data de Nascimento</label>                                        

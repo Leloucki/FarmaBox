@@ -34,14 +34,14 @@ class HomeController extends Controller
             if($isAdmin){
                 $remember = $request->input('remember') == '1' ? true : false;
                 if(Auth::attempt($credentials, $remember)){
-                    if(!(Auth::user()->ativado)){
-                        Auth::logout();
-                        $request->session()->invalidate();
-                        $request->session()->regenerateToken();
-                        return back()->withErrors([
-                            'message' => 'Usuário desativado'
-                        ]);
-                    }
+                    // if(!(Auth::user()->ativado)){
+                    //     Auth::logout();
+                    //     $request->session()->invalidate();
+                    //     $request->session()->regenerateToken();
+                    //     return back()->withErrors([
+                    //         'message' => 'Usuário desativado'
+                    //     ]);
+                    // }
                     return redirect('admin/produtos');
                 }
                 Auth::logout();

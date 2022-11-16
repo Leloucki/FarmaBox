@@ -13,4 +13,8 @@ class Assinatura extends Model
         'nome'
     ];
 
+    public function clienteAssinatura(){
+        return $this->hasMany('App\Models\ClienteAssinatura', 'id_assin');
+    }
+
 }

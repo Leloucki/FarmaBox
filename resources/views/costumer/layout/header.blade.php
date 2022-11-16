@@ -28,35 +28,9 @@
                             </form>
                         </div>
                     </div>
-
-                    <div class="wrap-icon right-section">
-                        <div class="wrap-icon-section wishlist">
-                            <a href="" class="link-direction">
-                                <i class="fa fa-heart" aria-hidden="true"></i>
-                                <div class="left-info">
-                                    <span class="index">0 item</span>
-                                    <span class="title">Desejos</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="wrap-icon-section minicart">
-                            <a href="" class="link-direction">
-                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                <div class="left-info">
-                                    <span class="index">4 itens</span>
-                                    <span class="title">Carrinho</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="wrap-icon-section show-up-after-1024">
-                            <a href="" class="mobile-navigation">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-
+                    
+                    @include('costumer.layout.qtdProduto')
+                    
                 </div>
             </div>
 

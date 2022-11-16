@@ -132,7 +132,7 @@
                             <h3 class="item-header">Nós usamos pagamentos seguros:</h3>
                             <div class="item-content">
                                 <div class="wrap-list-item wrap-gallery">
-                                    <img src="costumer/images/payment.png" style="max-width: 260px;">
+                                    <img src="{{asset('costumer/images/payment.png')}}" style="max-width: 260px;">
                                 </div>
                             </div>
                         </div>
@@ -199,8 +199,10 @@
 <script src="{{url('js/jquery-ui.min.js')}}"></script>
 <script src="{{url('js/jquery.mask.min.js')}}"></script>
 <script src="{{url('costumer/js/bootstrap.min.js')}}"></script>
+<script src="{{url('costumer/js/jquery.flexslider.js')}}"></script>
 <script src="{{url('costumer/js/chosen.jquery.min.js')}}"></script>
 <script src="{{url('costumer/js/owl.carousel.min.js')}}"></script>
+<script src="{{url('costumer/js/jquery.countdown.min.js')}}"></script>
 <script src="{{url('costumer/js/jquery.sticky.js')}}"></script>
 <script src="{{url('costumer/js/functions.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
