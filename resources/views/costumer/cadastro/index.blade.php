@@ -55,7 +55,7 @@
 										<input type="text" id="cpf" name="cpf" value="{{ old('cpf') }}" placeholder="CPF" required>
 									</fieldset>
 									<fieldset class="wrap-input">
-										<label for="dtNasc">Data de nascimentos</label>
+										<label for="dtNasc">Data de nascimento</label>
 										<input type="text" id="dtNasc" name="dtNasc" value="{{ old('dtNasc') }}" required>
 									</fieldset>
 									<fieldset class="wrap-title">

@@ -28,19 +28,19 @@
                                 <div id="pagamentoPerfil">
 									<p class="row-in-form">
 										<label for="nomeC">Nome no cartão</label>
-										<input type="text" id="nomeC" name="nomeC" value="{{$cartao->nome ?? ''}}" placeholder="" required>
+										<input type="text" id="nome" name="nome" value="{{$cartao->nome ?? ''}}" placeholder="" required>
                                     </p>
 									<p class="row-in-form">
 										<label for="cep">Número do cartão de crédito</label>
-										<input type="text" id="numeroC" name="numeroC" value="{{$cartao->numero ?? ''}}" placeholder="" required>
+										<input type="text" id="numero" name="numero" value="{{$cartao->numero ?? ''}}" placeholder="" required>
                                     </p>
 									<p class="row-in-form">
 										<label for="cep">Data de expiração</label>
-										<input type="text" id="dataExpC" name="dataExpC" value="{{$cartao->dataExp ?? ''}}" placeholder="" required>
+										<input type="text" id="dataExp" name="dataExp" value="{{$cartao->dataExp ?? ''}}" placeholder="" required>
                                     </p>							
 									<p class="row-in-form">
 										<label for="cep">CVV</label>
-										<input type="text" id="cvvC" name="cvvC" value="{{$cartao->cvv ?? ''}}" placeholder="" required>
+										<input type="text" id="cvv" name="cvv" value="{{$cartao->cvv ?? ''}}" placeholder="" required>
                                     </p>
                                 </div>
                                 <div class="col">

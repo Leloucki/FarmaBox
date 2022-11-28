@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Cliente;
 use App\Models\Endereco;
 use App\Models\Usuario;
+use App\Rules\Cpf;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
 
@@ -38,7 +39,7 @@ class CadastroController extends Controller
                     'estado' => ['required'],
                     'pais' => ['required'],
                     'cep' => ['required'],
-                    'cpf' => ['required', 'regex:/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/'],
+                    'cpf' => ['required', new Cpf],
                     'dtNasc' => 'required|before:-18 years|date_format:d/m/Y'
                 ]);
                 try{

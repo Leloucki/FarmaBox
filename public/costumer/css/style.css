@@ -7468,3 +7468,7 @@ input[type="submit"]:hover{
 .disabled-link {
     pointer-events: none;
 }
+
+.product-name span{
+    min-height: 55px;
+}

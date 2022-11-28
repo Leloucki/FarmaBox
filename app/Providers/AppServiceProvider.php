@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Assinatura;
 use App\Models\Categoria;
 use App\Models\Pedido;
 use Illuminate\Contracts\Session\Session;
@@ -33,6 +34,6 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
 
-        View::share('categorias', Categoria::get());        
+        View::share('categorias', Categoria::get());    
     }
 }

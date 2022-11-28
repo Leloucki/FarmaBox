@@ -63,7 +63,7 @@
 												<div class="form-group row">
 												  <label class="col-sm-3 col-form-label pe-0">Data de Nascimento</label>
 												  <div class="col-sm-9">
-													<input type="text" class="form-control" name="dtNasc" id="dtNasc" value="@if($cliente->dtNasc != null){{date_format(date_create($cliente->dtNasc),"d/m/Y")}}@endif">
+													<input type="text" class="form-control" name="dtNasc" id="dtNasc" value="@if($cliente->dtNasc != null){{date_format(date_create($cliente->dtNasc),"d/m/Y")}}@endif" required>
 												  </div>
 												</div>
 											  </div>

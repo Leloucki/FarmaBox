@@ -69,7 +69,7 @@
 									<fieldset class="wrap-input">
 										<label for="celular">Observação</label>
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="" id="observacao" name="observacao" style="height: 100px"></textarea>
+                                            <textarea class="form-control" placeholder=""  value="{{ old('observacao') }}" id="observacao" name="observacao" style="height: 100px"></textarea>
                                             <label for="floatingTextarea2">Comments</label>
                                           </div>
 									</fieldset>									
@@ -78,19 +78,19 @@
 									</fieldset>	
 									<fieldset class="wrap-input">
 										<label for="nome">Nome no cartão</label>
-										<input type="text" id="nome" name="nome" placeholder="" required>
+										<input type="text" id="nome" name="nome" placeholder=""  value="{{ old('nome') }}" required>
 									</fieldset>
 									<fieldset class="wrap-input">
 										<label for="cep">Número do cartão de crédito</label>
-										<input type="text" id="numero" name="numero" placeholder="" required>
+										<input type="text" id="numeroCard" name="numeroCard" placeholder=""  value="{{ old('numeroCard') }}" required>
 									</fieldset>
 									<fieldset class="wrap-input item-width-in-half left-item ">
 										<label for="cep">Data de expiração</label>
-										<input type="text" id="dataExp" name="dataExp" placeholder="" required>
+										<input type="text" id="dataExp" name="dataExp" placeholder=""  value="{{ old('dataExp') }}" required>
 									</fieldset>							
 									<fieldset class="wrap-input item-width-in-half">
 										<label for="cep">CVV</label>
-										<input type="text" id="cvv" name="cvv" placeholder="" required>
+										<input type="text" id="cvv" name="cvv" placeholder=""  value="{{ old('cvv') }}" required>
 									</fieldset>
                                     <fieldset class="wrap-title">
 										<h4 class="form-subtitle"></h4>

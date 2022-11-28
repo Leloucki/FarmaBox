@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cliente;
+use App\Rules\Cpf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -45,10 +46,10 @@ class ClienteController extends Controller
         $request->validate([
             'id_cliente' => ['required', 'integer'],
             'nome' => ['required'],
-            'email' => ['required'],
-            'celular' => ['required'],
+            'email' => ['required', 'email'],
+            'celular' => ['regex:"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$"'],
             'dtNasc' => 'required|before:-18 years|date_format:d/m/Y',
-            'cpf' => ['required'],
+            'cpf' => ['required', new Cpf],
             'logradouro' => ['required'],
             'numero' => ['required'],
             'bairro' => ['required'],
@@ -100,7 +101,7 @@ class ClienteController extends Controller
         ]);
     }
 
-    public function desativar(Request $request){
+    public function desativar(Request $request){    
         $request->validate([
             'idCliente' => ['required', 'integer']
         ]);

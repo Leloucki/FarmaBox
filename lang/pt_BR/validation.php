@@ -202,4 +202,10 @@ return [
         'dtNasc'                   => 'Data de Nascimento',
         '-18 years'                => '18 anos',
     ],
+    'credit_card' => [
+        'card_invalid' => 'Numero do cartão de crédtio inválido',
+        'card_expiration_date_format_invalid' => 'Formato de data de expiração inválida',
+        'card_expiration_date_invalid' => 'Data de expiração inválida',
+        'card_cvc_invalid' => 'CVC inválido',
+    ]
 ];

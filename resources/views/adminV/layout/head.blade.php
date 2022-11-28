@@ -17,5 +17,5 @@
 		<!-- inject:css -->
 		<link rel="stylesheet" href="{{asset('adminP/css/vertical-layout-light/style.css')}}">
 		<!-- endinject -->
-		<link rel="shortcut icon" href="{{asset('adminP/images/favicon.png')}}"/>
+		{{-- <link rel="shortcut icon" href="{{asset('adminP/images/favicon.png')}}"/> --}}
 	</head>

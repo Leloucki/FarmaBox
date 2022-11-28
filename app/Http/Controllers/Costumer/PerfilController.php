@@ -9,9 +9,13 @@ use App\Models\ClienteAssinatura;
 use App\Models\Endereco;
 use App\Models\Pedido;
 use App\Models\Usuario;
+use App\Rules\Cpf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use LVR\CreditCard\CardCvc;
+use LVR\CreditCard\CardExpirationDate;
+use LVR\CreditCard\CardNumber;
 
 class PerfilController extends Controller
 {
@@ -85,6 +89,13 @@ class PerfilController extends Controller
     }
 
     function salvarPagamento(Request $request){
+        $request->validate([
+            'nome' => ['required', "regex:/^((\b[A-zÀ-ú']{2,40}\b)\s*){2,}$/"],
+            'numeroCard' => ['required', new CardNumber],
+            'dataExp' => ['required', new CardExpirationDate('m/y')],
+            'cvv' => ['required', new CardCvc($request->input('numeroCard'))]
+        ]);
+
         $cliente = Cliente::where('id_usuario', Auth::user()->id)->first();
 
         $nomeC = $request->input('nomeC');
@@ -107,7 +118,7 @@ class PerfilController extends Controller
             'nome' => 'required',
             'email' => 'required|email',
             'celular' => ['required', 'regex:"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$"'],
-            'cpf' => ['required', 'regex:/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/'],
+            'cpf' => ['required', new Cpf],
             'lougradouro' => 'required',
             'cep' => 'required',
             'numero' => 'required',
@@ -117,10 +128,10 @@ class PerfilController extends Controller
             'dtNasc' => 'required|before:-18 years|date_format:d/m/Y',
         ]);
         //dd($request->all());        
-        $nome = $request->input('nomeP');
-        $email = $request->input('emailP');
-        $celular = $request->input('celularP');
-        $cpf = $request->input('cpfP');
+        $nome = $request->input('nome');
+        $email = $request->input('email');
+        $celular = $request->input('celular');
+        $cpf = $request->input('cpf');
         $lougradouro = $request->input('lougradouro');
         $cep = $request->input('cep');
         $numero = $request->input('numero');
@@ -137,8 +148,7 @@ class PerfilController extends Controller
         $cliente->celular = $celular;
         $cliente->dtNasc = $dtNasc;
         $cliente->cpf = $cpf;
-        $cliente->usuario->save();
-        $cliente->save();
+        $cliente->push();
 
         $endereco = Endereco::where('id_cliente', $cliente->id)->first();
         $endereco->logradouro = $lougradouro;

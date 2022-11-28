@@ -12,6 +12,9 @@ use App\Models\Pedido;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use LVR\CreditCard\CardCvc;
+use LVR\CreditCard\CardNumber;
+use LVR\CreditCard\CardExpirationDate;
 
 class AssinaturaController extends Controller
 {
@@ -24,26 +27,25 @@ class AssinaturaController extends Controller
         if($request->user() == null){return redirect('/cadastro');}
         $assinatura = Assinatura::where('nome', $assin)->first();
         if(!($assinatura)){return redirect('/');}
-        
-        switch ($assin) {
-            case 'Basico':
-                return view('costumer.assinatura.basico.cadastro', ['assinatura' => $assinatura]);
-                break;
 
-            case 'Personalizado':
-                return view('costumer.assinatura.personalizado.cadastro', ['assinatura' => $assinatura]);
-                break;
-            
-            default:
-                return redirect('/');
-                break;
+        if($assinatura){
+            return view('costumer.assinatura.cadastro', ['assinatura' => $assinatura]);
         }
+
+        return redirect('/');
     }
 
     function cadastrarAssin(Request $request, $id){
+        $request->validate([
+            'sexo' => ['required'],
+            'nome' => ['required', "regex:/^((\b[A-zÀ-ú']{2,40}\b)\s*){2,}$/"],
+            'numeroCard' => ['required', new CardNumber],
+            'dataExp' => ['required', new CardExpirationDate('m/y')],
+            'cvv' => ['required', new CardCvc($request->input('numeroCard'))]
+        ]);
+
         try {
-            //dd($request->user());
-            //dd($request->all());
+            DB::beginTransaction();
             $cliente = Cliente::where('id_usuario', $request->user()->id)->first();
             $cAssinExist = ClienteAssinatura::where('id_cliente', $cliente->id)->first();
             if($cAssinExist != null){
@@ -54,7 +56,7 @@ class AssinaturaController extends Controller
                     ]
                 );
             }
-            //dd($cliente);
+
             $cAssin = new ClienteAssinatura;
             $cartao = new Ccard;
             $cAssin->sexo = $request->input('sexo');
@@ -64,12 +66,11 @@ class AssinaturaController extends Controller
             $cAssin->id_assin = $id;
 
             $cartao->nome = $request->input('nome');
-            $cartao->numero = $request->input('numero');
+            $cartao->numero = $request->input('numeroCard');
             $cartao->dataExp = $request->input('dataExp');
             $cartao->cvv = $request->input('cvv');
             $cartao->id_cliente = $cliente->id;
-
-            DB::beginTransaction();
+            
             $cAssin->save();
             $cartao->save();
             DB::commit();
@@ -91,7 +92,7 @@ class AssinaturaController extends Controller
                 'messageTitle' => 'Ops...',
                 'message' => 'Erro ao cadastrar-se na assinatura'.$th->getMessage()
                 ]
-            );
+            )->withInput();
         }            
     }
 

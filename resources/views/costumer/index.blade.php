@@ -17,7 +17,7 @@
 						<div class="slide-info slide-1">
 							<h2 class="f-title">Receba em sua <b>Casa</b></h2>
 							<span class="subtitle">Assine já!</span>
-							<p class="sale-info">Por apenas: <span class="price">R$59,99</span></p>
+							<p class="sale-info">Por apenas: <span class="price">{{'R$' . number_format($assinaturaB->valor, 2, ',', '.'); }}</span></p>
 							<a href="{{url('/assinatura')}}" class="btn-link">Assinar</a>
 						</div>
 					</div>
@@ -25,15 +25,14 @@
 						<img src="costumer/images/main-slider-1-2.jpg" alt="" class="img-slide">
 						<div class="slide-info slide-2">
 							<h2 class="f-title">25% de DESCONTO</h2>
-							<span class="f-subtitle">Nos pagamentos online</span>
-							<p class="discount-code">Use o código: #SomosFarmaBox</p>
+							<span class="f-subtitle">Na primeira mensalidade</span>
 						</div>
 					</div>
 					<div class="item-slide">
 						<img src="costumer/images/main-slider-1-3.jpg" alt="" class="img-slide">
 						<div class="slide-info slide-3">
 							<h2 class="f-title">Grandes variedades de remédios feitos especialmente para <b>você</b></h2>
-							<p class="sale-info">A partir de: <b class="price">R$59,99</b></p>
+							<p class="sale-info">A partir de: <b class="price">{{'R$' . number_format($assinaturaB->valor, 2, ',', '.'); }}</b></p>
 							<a href="{{url('/assinatura')}}" class="btn-link">Assine agora!</a>
 						</div>
 					</div>

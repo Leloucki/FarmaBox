@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Costumer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assinatura;
 use App\Models\Usuario;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ use Illuminate\Support\Str;
 class HomeController extends Controller
 {
     function index(Request $request){
-        return view('costumer.index');
+        $assinaturaB = Assinatura::where('nome', 'like','%basico%')->first();
+        return view('costumer.index', ['assinaturaB' => $assinaturaB]);
     }
 
     function login(Request $request){
@@ -93,7 +95,7 @@ class HomeController extends Controller
         //dd($request->all());
         $request->validate([
             'token' => 'required',
-            'password' => 'required|min:3|confirmed',
+            'password' => 'required|min:6|confirmed',
             'emailR' => 'required|email'
         ]);
 

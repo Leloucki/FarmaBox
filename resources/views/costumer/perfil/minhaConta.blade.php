@@ -22,7 +22,7 @@
                 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
 
                     <div class="row">
-                        <div class="wrap-address-billing">                     
+                        <div class="wrap-address-billing">                
                             <form action="/perfil/salvarConta" method="POST" id="formPerfil">@csrf
                                 <h3 class="box-title">minha conta</h3>
                                 <div id="minhaConta" class="row">                                                                    

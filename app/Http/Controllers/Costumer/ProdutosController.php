@@ -43,6 +43,11 @@ class ProdutosController extends Controller
             return  ['icon' => 'warning', 'message' => 'Produto já existente na assinatura!'];
         }
 
+        $isBasico = $cliente->clienteAssinatura->assinatura->nome == "Basico";
+        if($isBasico){
+            return  ['icon' => 'warning', 'message' => 'O seu tipo de assinatura não possui acesso a este recurso!'];
+        }
+
         $pedido = new Pedido;
         $pedido->id_produto = $id_produto;
         $pedido->id_cliente_assinatura = $cliente->clienteAssinatura->id;
@@ -70,6 +75,11 @@ class ProdutosController extends Controller
         //dd($pedidoExist);
         if($pedidoExist){
             return back()->with(['messageIcon' => 'warning', 'messageTitle' => 'Ops...', 'message' => 'Produto já existente na assinatura!']);
+        }
+
+        $isBasico = $cliente->clienteAssinatura->assinatura->nome == "Basico";
+        if($isBasico){
+            return back()->with(['messageIcon' => 'warning', 'messageTitle' => 'Ops...', 'message' => 'O seu tipo de assinatura não possui acesso a este recurso!']);
         }
 
         $pedido = new Pedido;
