@@ -69,7 +69,7 @@ class HomeController extends Controller
 
         $boolStatus = $status === Password::RESET_LINK_SENT;
         //dd($boolStatus ? ['status' => __($status)] : ['emailStatus' => __($status)]);
-        return $boolStatus ? back()->with(['message' => __($status), 'messageTitle' => 'Sucesso', 'messageIcon' => 'success']) : back()->with(['message' => __($status), 'messageTitle' => 'Ops...', 'messageIcon' => 'warning']); 
+        return $boolStatus ? redirect('/admin')->with(['success' => __($status)]) : back()->with(['message' => __($status), 'messageTitle' => 'Ops...', 'messageIcon' => 'warning']); 
     }
 
     function resetSenhaView(Request $request, $token){
