@@ -34,13 +34,14 @@
 														<th>Nome</th>
 														<th>E-mail</th>
 														<th>Assinatura</th>
+														<th>Produtos</th>
 														<th>CPF</th>
 														<th>Celular</th>
 														<th>CEP</th>
 														<th>Nascimento</th>
 														<th>Ativado</th>
 														<th>Alterar</th>				
-														<th>Ativar/Desativar</th>
+														<th>Ativar/Desativar</th>			
 													</tr>
 												</thead>
 												<tbody>														
@@ -53,7 +54,14 @@
 															@else
 															Nenhuma
 															@endif
-														</td>						
+														</td>
+														<td>												
+														@if($cliente->clienteAssinatura != null)
+														<a href="{{url('admin/pedido/clientes?idC='.$cliente->id)}}" class="btn btn-primary">{{$cliente->clienteAssinatura->pedidos->count()}}</a>
+														@else
+														0
+														@endif	
+														</td>					
 														<td>{{$cliente->cpf}}</td>
 														<td>{{$cliente->celular}}</td>
 														<td>{{$cliente->endereco->cep}}</td>
@@ -95,7 +103,7 @@
 																	</button>
 																</form>
 															@endif															
-														</td>													
+														</td>																
 													</tr>
 													@empty
 													Nenhum usuario encontrado!												
@@ -103,7 +111,7 @@
 													
 												</tbody>
 											</table>											
-										</div>	
+										</div>										
 										{{ $clientes->appends(Request::all())->links('vendor.pagination.bootstrap-5') }}						
 									</div>									
 								</div>

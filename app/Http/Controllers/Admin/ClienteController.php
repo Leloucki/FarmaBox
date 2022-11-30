@@ -185,4 +185,24 @@ class ClienteController extends Controller
         ]);
     }
 
+    public function pedidoView(Request $request){
+        $request->validate([
+            'idC' => ['required', 'integer']
+        ]);
+
+        $cliente = Cliente::where('id', $request->get('idC'))->first();
+        $isCA = $cliente->clienteAssinatura;
+        $totalPedido = 0;
+        $pedidos = [];
+        if($isCA){
+            $pedidos = $isCA->pedidos;
+            foreach($pedidos as $pedido){
+                $totalPedido += $pedido->produto->valor;
+            }
+        }
+        
+
+        return view('adminV.clientes.pedido', ['cliente' => $cliente, 'pedidos' => $pedidos, 'totalPedido' => $totalPedido]);
+    }
+
 }

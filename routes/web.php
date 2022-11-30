@@ -54,6 +54,7 @@ Route::namespace('App\Http\Controllers\Admin')->group(function(){
         Route::post('admin/ativar/clientes', 'ClienteController@ativar');
         Route::get('admin/editar/clientes', 'ClienteController@editarView');
         Route::post('admin/editar/clientes', 'ClienteController@editar');
+        Route::get('admin/pedido/clientes', 'ClienteController@pedidoView');
 
         Route::get('admin/assinaturas', 'AssinaturaController@index');
         Route::get('admin/editar/assinaturas', 'AssinaturaController@editarView');

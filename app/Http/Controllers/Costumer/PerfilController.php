@@ -63,6 +63,9 @@ class PerfilController extends Controller
     }
 
     function salvarProdutos(Request $request){
+        $request->validate([
+            'produtos.*.quantidade' => ['required', 'integer', 'max:10']
+        ]);
         $produtos = $request->input('produtos');
         $cliente = $this->getCliente();
         $clienteAssin = ClienteAssinatura::where('id_cliente', $cliente->id)->first();
