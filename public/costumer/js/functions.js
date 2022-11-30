@@ -436,6 +436,7 @@
 				$(document).on('click', '.pr-cart-item .delete .btn-delete', function(event) {
 					event.preventDefault();
 					$(this).closest('.pr-cart-item').remove();
+					setSumario();
 				});
 			}
 		},
